@@ -556,23 +556,24 @@ Function Install-Automate {
             Stop-Process -Name "ltsvcmon","lttray","ltsvc","ltclient" -Force -PassThru
             $Date = (get-date -UFormat %Y-%m-%d_%H-%M-%S)
             $LogFullPath = "$env:windir\Temp\Automate_Agent_$Date.log"
-            $InstallExitCode = "$($SoftwareFullPath) /q /s /location=$($LocationID) /log $($LogFullPath)" 
+            $arguments = "/q /s /location=$($LocationID) /log $($LogFullPath)"
+            $InstallExitCode = (Start-Process -NoNewWindow -FilePath $SoftwareFullPath -ArgumentList $arguments -Wait)
             Write-Verbose "Install Log Files: $LogFullPath"
-            If ($InstallExitCode -eq 0) {
+            If ($InstallExitCode.ExitCode -eq 0) {
                 If (!$Silent) {Write-Verbose "The Automate Agent Installer Executed Without Errors"}
             } Else {
                 Write-Host "Automate Installer Exit Code: $InstallExitCode" -ForegroundColor Red
                 Write-Host "Automate Installer Logs: $LogFullPath" -ForegroundColor Red
-                Write-Host "The Automate MSI failed. Waiting 15 Seconds..." -ForegroundColor Red
-                Start-Sleep -s 15
-                Write-Host "Installer will execute twice (KI 12002617)" -ForegroundColor Yellow
+                Write-Host "The Automate Installer failed. Waiting 15 Seconds..." -ForegroundColor Red
+                Start-Sleep -s 55
+                Write-Host "Installer will execute twice" -ForegroundColor Yellow
                 $Date = (get-date -UFormat %Y-%m-%d_%H-%M-%S)
                 $LogFullPath = "$env:windir\Temp\Automate_Agent_$Date.log"
-                $InstallExitCode = "$($SoftwareFullPath) /q /s /location=$($LocationID) /log $($LogFullPath)" 
+                $InstallExitCode = (Start-Process -NoNewWindow -FilePath $SoftwareFullPath -ArgumentList $arguments -Wait) 
                 Write-Host "Automate Installer Exit Code: $InstallExitCode" -ForegroundColor Yellow
                 Write-Host "Automate Installer Logs: $LogFullPath" -ForegroundColor Yellow
             }# End Else
-        If ($InstallExitCode -eq 0) {
+        If ($InstallExitCode.ExitCode -eq 0) {
             While ($Counter -ne 30) {
                 $Counter++
                 Start-Sleep 10
