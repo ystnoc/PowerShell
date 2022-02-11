@@ -556,7 +556,7 @@ Function Install-Automate {
             Stop-Process -Name "ltsvcmon","lttray","ltsvc","ltclient" -Force -PassThru
             $Date = (get-date -UFormat %Y-%m-%d_%H-%M-%S)
             $LogFullPath = "$env:windir\Temp\Automate_Agent_$Date.log"
-            $InstallExitCode = "&$($SoftwareFullPath) /q /s LOCATION=$($LocationID) /L*V $($LogFullPath)" 
+            $InstallExitCode = "$($SoftwareFullPath) /q /s /location=$($LocationID) /log $($LogFullPath)" 
             Write-Verbose "Install Log Files: $LogFullPath"
             If ($InstallExitCode -eq 0) {
                 If (!$Silent) {Write-Verbose "The Automate Agent Installer Executed Without Errors"}
@@ -568,7 +568,7 @@ Function Install-Automate {
                 Write-Host "Installer will execute twice (KI 12002617)" -ForegroundColor Yellow
                 $Date = (get-date -UFormat %Y-%m-%d_%H-%M-%S)
                 $LogFullPath = "$env:windir\Temp\Automate_Agent_$Date.log"
-                $InstallExitCode = "&$($SoftwareFullPath) /q /s LOCATION=$($LocationID) /L*V $($LogFullPath)" 
+                $InstallExitCode = "$($SoftwareFullPath) /q /s /location=$($LocationID) /log $($LogFullPath)" 
                 Write-Host "Automate Installer Exit Code: $InstallExitCode" -ForegroundColor Yellow
                 Write-Host "Automate Installer Logs: $LogFullPath" -ForegroundColor Yellow
             }# End Else
@@ -816,12 +816,12 @@ BEGIN
     
     $DownloadPath = $null
     If ($Token -ne $null) {
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?InstallerToken=$Token"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/agent_install.exe"
         Write-Verbose "Downloading from: $($DownloadPath)"
     }
     else {
         Write-Verbose "A -Token <String[]> was not entered"
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?Probe=1&installType=msi&MSILocations=$($LocationID)"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/agent_install.exe"
         Write-Verbose "Downloading from (Old): $($DownloadPath)"
     }
 
@@ -2537,15 +2537,3 @@ param (
         }
     }
 } # End New-IPRange
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
