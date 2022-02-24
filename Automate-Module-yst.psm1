@@ -562,10 +562,10 @@ Function Install-Automate {
             If ($InstallExitCode.ExitCode -eq 0) {
                 If (!$Silent) {Write-Verbose "The Automate Agent Installer Executed Without Errors"}
             } Else {
-                Write-Host "Automate Installer Exit Code: $InstallExitCode" -ForegroundColor Yellow
-                Write-Host "Automate Installer Logs: $LogFullPath" -ForegroundColor Yellow
-                Write-Host "The Automate Installer failed. Waiting 55 Seconds..." -ForegroundColor Red
-                Start-Sleep -s 55
+                #Write-Host "Automate Installer Exit Code: $InstallExitCode" -ForegroundColor Yellow
+                #Write-Host "Automate Installer Logs: $LogFullPath" -ForegroundColor Yellow
+                #Write-Host "The Automate Installer failed. Waiting 55 Seconds..." -ForegroundColor Red
+                #Start-Sleep -s 55
                 #Write-Host "Installer will execute twice" -ForegroundColor Yellow
                 $Date = (get-date -UFormat %Y-%m-%d_%H-%M-%S)
                 $LogFullPath = "$env:windir\Temp\Automate_Agent_$Date.log"
