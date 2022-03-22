@@ -616,6 +616,7 @@ Function Install-Automate {
                 } # end If
             } # end While
         } # end If ExitCode 0
+        Start-Sleep -s 30
         Confirm-Automate -Silent -Verbose:$Verbose
         If (!($Global:Automate.Online -and $Global:Automate.ComputerID -ne $Null)) {
             If (!$Silent) {
