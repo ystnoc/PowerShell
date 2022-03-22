@@ -597,7 +597,7 @@ Function Install-Automate {
         } Else {
             While ($Counter -ne 3) {
                 $Counter++
-                Start-Sleep 10
+                Start-Sleep 30
                 Confirm-Automate -Silent -Verbose:$Verbose
                 If ($Global:Automate.Server -like "Enter the server address here*") {
                     Write-Verbose "The Automate Server Address was not written properly"
