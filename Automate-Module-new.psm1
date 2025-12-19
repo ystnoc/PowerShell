@@ -616,7 +616,7 @@ Function Install-Automate {
 
     # If SystemPass, download MSI. If -Token, download ZIP and extract.
     If ($SystemPass -ne $Null) {
-        $DownloadPath = "$($AutomateURL)/Labtech/Service/LabTechRemoteAgent.msi"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/Agent_MSI_Install.zip"
         $Filename = "Automate_Agent.msi"
         $SoftwareFullPath = "$SoftwarePath\$Filename"
         If ((Test-Path $SoftwareFullPath)) {Remove-Item $SoftwareFullPath | Out-Null}
@@ -635,7 +635,7 @@ Function Install-Automate {
             Break
         }
     } ElseIf ($Token -ne $Null) {
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?InstallerToken=$Token"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/Agent_MSI_Install.zip"
         $DownloadFilename = "Agent_Install.zip"
         $DownloadFullPath = "$SoftwarePath\$DownloadFilename"
         $Filename = "Agent_Install.msi"
@@ -669,7 +669,7 @@ Function Install-Automate {
         }
     } Else {
         Write-Verbose "A -Token <String[]> was not entered"
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?Probe=1&installType=msi&MSILocations=$($LocationID)"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/Agent_MSI_Install.zip"
         $Filename = "Automate_Agent.msi"
         $SoftwareFullPath = "$SoftwarePath\$Filename"
         Try {
@@ -1000,12 +1000,12 @@ BEGIN
     
     $DownloadPath = $null
     If ($Token -ne $null) {
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?InstallerToken=$Token"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/Agent_MSI_Install.zip"
         Write-Verbose "Downloading from: $($DownloadPath)"
     }
     Else {
         Write-Verbose "A -Token <String[]> was not entered"
-        $DownloadPath = "$($AutomateURL)/Labtech/Deployment.aspx?Probe=1&installType=msi&MSILocations=$($LocationID)"
+        $DownloadPath = "https://labtech.yardsticktechnologies.com/labtech/transfer/software/labtech/Agent_MSI_Install.zip"
         Write-Verbose "Downloading from (Old): $($DownloadPath)"
     }
 
