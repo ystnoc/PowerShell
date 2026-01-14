@@ -235,7 +235,7 @@ If ((([Int][System.Environment]::OSVersion.Version.Build) -gt 6000) -and ((get-h
 } Else {
     $DownloadPath = "http://s3.amazonaws.com/assets-cp/assets/Agent_Uninstall.exe"
 }
-$SoftwarePath = "C:\Support\Automate"
+$SoftwarePath = "C:\Support\Automate_script"
 $UninstallApps = @(
     "ConnectWise Automate Remote Agent"
     "LabTech® Software Remote Agent"
@@ -507,7 +507,7 @@ Function Install-Automate {
     $Error.Clear()
     If ($Transcript) {Start-Transcript -Path "$($env:windir)\Temp\Automate_Deploy.txt" -Force}
     $SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol
-    $SoftwarePath = "C:\Support\Automate"
+    $SoftwarePath = "C:\Support\Automate_script"
     $Filename = "Automate_Agent.msi"
     $SoftwareFullPath = "$SoftwarePath\$Filename"
     $AutomateURL = "https://$($Server)"
